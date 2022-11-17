@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { createSubscription, deleteSubscripton, getSubscriptions } from "../../managers/SubscriptionManager"
+import { createSubscription, deleteSubscription, getSubscriptions } from "../../managers/SubscriptionManager"
 import { getUser } from "../../managers/UserManager"
 
 export const UserDetail = () => {
@@ -17,7 +17,7 @@ export const UserDetail = () => {
         [userId])
 
     useEffect(
-        ()=>{
+        () => {
             getSubscriptions().then(subData => setSubscriptions(subData))
         },
         [])
@@ -44,7 +44,7 @@ export const UserDetail = () => {
 
     let notSelf = true
 
-    if(user.id === userObject){
+    if (user.id === userObject) {
         notSelf = false
     }
 
@@ -56,12 +56,12 @@ export const UserDetail = () => {
         <div className="user-bio">Bio: {user?.bio}</div>
         {
             notSelf
-            ? <> {foundSubscription 
-                ? <button id={foundSubscription.id} onClick={clickEvent => deleteSubscripton(clickEvent).then(window.location.reload())}>Unsubscribe</button>
-                : <button onClick={()=>makeSubscription()}>Subscribe</button>
-                } </> 
-            : null
-            
+                ? <> {foundSubscription
+                    ? <button id={foundSubscription.id} onClick={clickEvent => deleteSubscription(clickEvent).then(window.location.reload())}>Unsubscribe</button>
+                    : <button onClick={() => makeSubscription()}>Subscribe</button>
+                } </>
+                : null
+
         }
     </div>
 }
