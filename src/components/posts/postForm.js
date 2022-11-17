@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
-import { getTags } from "../../managers/Tags"
+import { getTags } from "../../managers/TagManager"
 
 export const PostForm = () => {
 
@@ -9,6 +9,7 @@ export const PostForm = () => {
     const navigate = useNavigate()
 
     const [categories, setCategories] = useState([])
+
     const [post, setNewPost] = useState({
         user_id: "",
         category_id: "",
@@ -17,11 +18,11 @@ export const PostForm = () => {
         image_url: "",
         content: "",
     })
+
     const [tags, setTags] = useState([])
 
+    const [checked, setChecked] = useState([])
 
-   const [checked, setChecked] = useState([])
-   
     const handleCheck = (event) => {
         let updatedList = [...checked]
         if (event.target.checked) {
@@ -43,7 +44,7 @@ export const PostForm = () => {
         },
         []
     )
-    
+
     let postId = null
 
     const saveButton = (event) => {
@@ -70,30 +71,30 @@ export const PostForm = () => {
             body: JSON.stringify(postToSendToAPI)
         })
             .then(response => response.json())
-            .then(updatedPost =>{
+            .then(updatedPost => {
 
                 postId = updatedPost.id
-                
+
                 checked.map(check => {
                     const postTagsToSendToAPI = {
                         post_id: updatedPost.id,
                         tag_id: parseInt(check)
                     }
-                    return fetch("http://localhost:8088/post_tags", { 
-                        method: "POST", 
+                    return fetch("http://localhost:8088/post_tags", {
+                        method: "POST",
                         headers: {
                             "Content-Type": "application/json"
                         },
                         body: JSON.stringify(postTagsToSendToAPI)
-                    })    
-                    .then(response => response.json())
+                    })
+                        .then(response => response.json())
                 })
             })
             .then(() => {
                 navigate(`/posts/${postId}`)
             })
 
-        
+
     }
 
 
@@ -188,13 +189,13 @@ export const PostForm = () => {
         <fieldset>
             {
                 tags.map(tag => <>
-                <input type="checkbox" id="tag" name="tag" value={tag.id}
-                onChange = {
-                    (evt) => {
-                        handleCheck(evt)
-                    }
-                }/>
-                <label htmlFor="tag" value={tag.id}>{tag.label}</label>
+                    <input type="checkbox" id="tag" name="tag" value={tag.id}
+                        onChange={
+                            (evt) => {
+                                handleCheck(evt)
+                            }
+                        } />
+                    <label htmlFor="tag" value={tag.id}>{tag.label}</label>
                 </>
                 )
             }

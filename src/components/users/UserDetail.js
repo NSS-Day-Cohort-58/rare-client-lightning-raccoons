@@ -7,6 +7,7 @@ export const UserDetail = () => {
     const { userId } = useParams()
 
     const [user, setUser] = useState({})
+
     const [subscriptions, setSubscriptions] = useState([])
 
 
@@ -57,8 +58,12 @@ export const UserDetail = () => {
         {
             notSelf
                 ? <> {foundSubscription
-                    ? <button id={foundSubscription.id} onClick={clickEvent => deleteSubscription(clickEvent).then(window.location.reload())}>Unsubscribe</button>
-                    : <button onClick={() => makeSubscription()}>Subscribe</button>
+                    ? <button id={foundSubscription.id}
+                        onClick={clickEvent =>
+                            deleteSubscription(clickEvent).then(window.location.reload())}>
+                        Unsubscribe</button>
+                    : <button onClick={() => makeSubscription()}>
+                        Subscribe</button>
                 } </>
                 : null
 
