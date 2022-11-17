@@ -33,10 +33,6 @@ export const TagList = () => {
 
     const handleSaveButtonClick = (clickEvent) => {
         clickEvent.preventDefault()
-
-
-
-
     }
 
     return <>
@@ -63,7 +59,9 @@ export const TagList = () => {
                                         <fieldset>
                                             <div className="form-group">
                                                 <label htmlFor="label"></label>
-                                                <input type="text" name="label" required autoFocus className="form-control"
+                                                <input type="text" name="label" className="form-control"
+                                                    required
+                                                    autoFocus
                                                     placeholder="Tag"
                                                     defaultValue={tag.label}
                                                     onChange={handleControlledInputChange}
