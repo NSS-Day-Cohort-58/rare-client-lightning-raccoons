@@ -4,7 +4,7 @@ import "./categories.css"
 
 /* 
     TO-DO:
-    - Create functionality for both the "Edit" and "Delete" buttons in the return
+    - Create functionality for both the "Edit" and "Delete" buttons in the return 
 */
 
 export const CategoryList = () => {
