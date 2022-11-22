@@ -47,7 +47,10 @@ export const PostForm = () => {
 
     let postId = null
 
-    const saveButton = (event) => {
+    // ^ RENAMED THIS FUNCTION TO "createPost"
+    // ^ WAS CALLED "saveButton"
+
+    const createPost = (event) => {
         event.preventDefault()
 
         const localUser = localStorage.getItem("auth_token")
@@ -201,7 +204,7 @@ export const PostForm = () => {
             }
         </fieldset>
         <button
-            onClick={(clickEvent) => saveButton(clickEvent)}
+            onClick={(clickEvent) => createPost(clickEvent)}
             className="save_button">
             Submit New Post
         </button>
