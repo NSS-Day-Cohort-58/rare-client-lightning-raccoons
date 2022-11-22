@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react"
 
 export const getTags = () => {
     return fetch("http://localhost:8000/tags", {

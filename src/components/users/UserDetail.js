@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { createSubscription, deleteSubscripton, getSubscriptions } from "../../managers/SubscriptionManager"
+import { createSubscription, deleteSubscription, getSubscriptions } from "../../managers/SubscriptionManager"
 import { getUser } from "../../managers/UserManager"
 
 export const UserDetail = () => {
     const { userId } = useParams()
 
     const [user, setUser] = useState({})
+
     const [subscriptions, setSubscriptions] = useState([])
 
 
@@ -17,7 +18,7 @@ export const UserDetail = () => {
         [userId])
 
     useEffect(
-        ()=>{
+        () => {
             getSubscriptions().then(subData => setSubscriptions(subData))
         },
         [])
@@ -44,24 +45,28 @@ export const UserDetail = () => {
 
     let notSelf = true
 
-    if(user.id === userObject){
+    if (user.id === userObject) {
         notSelf = false
     }
 
     return <div className="userDiv">
-        <div className="user-photo"><img src={user?.profile_image_url} alt="image"></img></div>
+        <div className="user-photo"><img src={user?.profile_image_url} alt=""></img></div>
         <div className="user-name">Name: {user?.first_name} {user?.last_name}</div>
         <div className="user-username">Username: {user?.username} </div>
         <div className="user-date">Creation Date: {user?.created_on} </div>
         <div className="user-bio">Bio: {user?.bio}</div>
         {
             notSelf
-            ? <> {foundSubscription 
-                ? <button id={foundSubscription.id} onClick={clickEvent => deleteSubscripton(clickEvent).then(window.location.reload())}>Unsubscribe</button>
-                : <button onClick={()=>makeSubscription()}>Subscribe</button>
-                } </> 
-            : null
-            
+                ? <> {foundSubscription
+                    ? <button id={foundSubscription.id}
+                        onClick={clickEvent =>
+                            deleteSubscription(clickEvent).then(window.location.reload())}>
+                        Unsubscribe</button>
+                    : <button onClick={() => makeSubscription()}>
+                        Subscribe</button>
+                } </>
+                : null
+
         }
     </div>
 }
