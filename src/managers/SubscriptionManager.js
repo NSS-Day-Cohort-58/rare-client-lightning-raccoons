@@ -4,7 +4,7 @@ export const getSubscriptions = () => {
 }
 
 export const createSubscription = (sub) => {
-    return fetch("http://localhost:8088/subscriptions", {
+    return fetch("http://localhost:8000/subscriptions", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

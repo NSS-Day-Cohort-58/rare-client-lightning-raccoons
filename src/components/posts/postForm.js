@@ -9,7 +9,6 @@ export const PostForm = () => {
     const navigate = useNavigate()
 
     const [categories, setCategories] = useState([])
-
     const [post, setNewPost] = useState({
         user_id: "",
         category_id: "",
@@ -78,7 +77,7 @@ export const PostForm = () => {
 
                 postId = updatedPost.id
 
-                checked.map(check => {
+                checked.forEach(check => {
                     const postTagsToSendToAPI = {
                         post_id: updatedPost.id,
                         tag_id: parseInt(check)
